@@ -1,0 +1,28 @@
+<!-- templates/bike/form.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+    <!-- Add any additional styling or scripts here -->
+  </head>
+  <body>
+    <div class="container">
+      <form method="POST" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <h2>Send Message</h2>
+        {% for field in form %}
+        <div class="inputBox">
+          {{ field.label_tag }} {{ field }}
+          <span>{{ field.label }}</span>
+          {{ field.errors }}
+        </div>
+        {% endfor %}
+        <div class="inputBox">
+          <input type="Submit" value="Send" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
