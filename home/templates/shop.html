@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-	<title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
+	<title>Bike and Arms</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -93,107 +93,114 @@
 	</nav> -->
 
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="{% url 'home' %}"><img id="bg1" src="{% static '/delevery/1111-removebg-preview.png' %}" alt=""></a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
+		<div class="container">
+			<a class="navbar-brand" href="{% url 'home' %}"><img id="bg1"
+					src="{% static '/delevery/1111-removebg-preview.png' %}" alt=""></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-			  
-	          <li class="nav-item dropdown">
-				
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
-          
-			  <div class="dropdown-menu" aria-labelledby="dropdown04">
-				{% for j in cat %}
-					<a class="dropdown-item {% if j.name == selected_category %}selected{% endif %}" href="{% url 'shop' %}?category={{ j.name }}">{{ j.name }}</a>
-				{% endfor %}
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+
+					<li class="nav-item dropdown">
+
+						<a class="nav-link dropdown-toggle" id="dropdown04" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">Category</a>
+
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							{% for j in cat %}
+							<a class="dropdown-item {% if j.name == selected_category %}selected{% endif %}"
+								href="{% url 'shop' %}?category={{ j.name }}">{{ j.name }}</a>
+							{% endfor %}
+						</div>
+
+					</li>
+					<!-- <li class="nav-item"><a href="about.html" class="nav-link">About</a></li> -->
+					<li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+					{% if user.is_authenticated %}
+					<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+					{% else %}
+					<li class="nav-item"><a href="{% url 'login' %}" class="nav-link">LogIn</a></li>
+					{% endif %}
+
+					<li class="nav-item cta cta-colored"><a href="{% url 'cart' %}" class="nav-link"><span
+								class="icon-shopping_cart"></span></a></li>
+					<div class="search-container">
+						<form action="{% url 'shop' %}" method="get">
+							<input type="text" placeholder="Search.." name="search" value="{{ request.GET.search }}">
+							<button type="submit"><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+
+				</ul>
 			</div>
-			 
-            </li>
-	          <!-- <li class="nav-item"><a href="about.html" class="nav-link">About</a></li> -->
-	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-			  {% if user.is_authenticated %}
-    		<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
-			{% else %}
-    		<li class="nav-item"><a href="{% url 'login' %}" class="nav-link">LogIn</a></li>
-			{% endif %}
-
-	          <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}" class="nav-link"><span class="icon-shopping_cart"></span></a></li>
-			  <div class="search-container">
-				<form action="{% url 'shop' %}" method="get">
-					<input type="text" placeholder="Search.." name="search" value="{{ request.GET.search }}">
-					<button type="submit"><i class="fa fa-search"></i></button>
-				</form>
-			</div>	
-			
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
+		</div>
+	</nav>
 	<!-- END nav -->
 	<div class="hero-wrap hero-bread" style="background-image: url('{% static 'delevery/bg2.jpg' %}');">
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Bike &</a></span> <span>Armors</span></p>
+					<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Bike &</a></span>
+						<span>Armors</span></p>
 					<h1 class="mb-0 bread">Product</h1>
 				</div>
 			</div>
 		</div>
 	</div>
-				
+
 
 	<section class="ftco-section bg-light">
 		<div class="container">
 			{% for category in categories %}
 			<div class="row">
-			
+
 			</div>
 			<div class="row">
 				{% for product in products %}
-					{% if product.category == category %}
-					<div class="col-sm-6 col-md-4 col-lg-3">
-						<div class="product">
-							<a href="#" class="img-prod">
-								<img class="img-fluid" src="{{ product.product_image.url }}" alt="Colorlib Template">
-								<div class="overlay"></div>
-							</a>
-							<div class="text py-3 pb-4 px-3">
-								<div class="d-flex">
-									<div class="cat">
-										<span>{{ product.category }}</span>
-									</div>
-									<div class="rating">
-										<p class="text-right mb-0">
-											<a href="#"><span class="ion-ios-star-outline"></span></a>
-											<a href="#"><span class="ion-ios-star-outline"></span></a>
-											<a href="#"><span class="ion-ios-star-outline"></span></a>
-											<a href="#"><span class="ion-ios-star-outline"></span></a>
-											<a href="#"><span class="ion-ios-star-outline"></span></a>
-										</p>
-									</div>
+				{% if product.category == category %}
+				<div class="col-sm-6 col-md-4 col-lg-3">
+					<div class="product">
+						<a href="#" class="img-prod">
+							<img class="img-fluid" src="{{ product.product_image.url }}" alt="Colorlib Template">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 pb-4 px-3">
+							<div class="d-flex">
+								<div class="cat">
+									<span>{{ product.category }}</span>
 								</div>
-								<h3><a href="#">{{ product.product_name }}</a></h3>
-								<div class="pricing">
-									<p class="price"><span>{{ product.product_price }}</span></p>
+								<div class="rating">
+									<p class="text-right mb-0">
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+									</p>
 								</div>
-								<p class="bottom-area d-flex px-3">
-									<a href="{% url 'product' product.id %}" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
-								</p>
 							</div>
+							<h3><a href="#">{{ product.product_name }}</a></h3>
+							<div class="pricing">
+								<p class="price"><span>{{ product.product_price }}</span></p>
+							</div>
+							<p class="bottom-area d-flex px-3">
+								<a href="{% url 'product' product.id %}" class="buy-now text-center py-2">Buy
+									now<span><i class="ion-ios-cart ml-1"></i></span></a>
+							</p>
 						</div>
 					</div>
-					{% endif %}
+				</div>
+				{% endif %}
 				{% endfor %}
 			</div>
 			{% endfor %}
 		</div>
 	</section>
-	
+
 
 
 	<section class="ftco-gallery">
